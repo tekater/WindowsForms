@@ -31,16 +31,17 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.label1 = new System.Windows.Forms.Label();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.showDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.showControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.cbShowDate = new System.Windows.Forms.CheckBox();
 			this.btnHideControls = new System.Windows.Forms.Button();
 			this.btnClose = new System.Windows.Forms.Button();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.showDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.showControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.btnFontChanger = new System.Windows.Forms.Button();
 			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -56,6 +57,45 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Clock";
 			this.label1.DoubleClick += new System.EventHandler(this.label1_DoubleClick);
+			// 
+			// contextMenuStrip1
+			// 
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showDateToolStripMenuItem,
+            this.showControlsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.closeToolStripMenuItem});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(152, 76);
+			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+			// 
+			// showDateToolStripMenuItem
+			// 
+			this.showDateToolStripMenuItem.CheckOnClick = true;
+			this.showDateToolStripMenuItem.Name = "showDateToolStripMenuItem";
+			this.showDateToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+			this.showDateToolStripMenuItem.Text = "Show Date";
+			this.showDateToolStripMenuItem.Click += new System.EventHandler(this.showDateToolStripMenuItem_Click);
+			// 
+			// showControlsToolStripMenuItem
+			// 
+			this.showControlsToolStripMenuItem.CheckOnClick = true;
+			this.showControlsToolStripMenuItem.Name = "showControlsToolStripMenuItem";
+			this.showControlsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+			this.showControlsToolStripMenuItem.Text = "Show Controls";
+			this.showControlsToolStripMenuItem.Click += new System.EventHandler(this.showControlsToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
+			// 
+			// closeToolStripMenuItem
+			// 
+			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+			this.closeToolStripMenuItem.Text = "Close";
+			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
 			// 
 			// timer1
 			// 
@@ -105,50 +145,22 @@
 			this.notifyIcon1.Visible = true;
 			this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
 			// 
-			// contextMenuStrip1
+			// btnFontChanger
 			// 
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showDateToolStripMenuItem,
-            this.showControlsToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.closeToolStripMenuItem});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(152, 76);
-			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-			// 
-			// showDateToolStripMenuItem
-			// 
-			this.showDateToolStripMenuItem.CheckOnClick = true;
-			this.showDateToolStripMenuItem.Name = "showDateToolStripMenuItem";
-			this.showDateToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-			this.showDateToolStripMenuItem.Text = "Show Date";
-			this.showDateToolStripMenuItem.Click += new System.EventHandler(this.showDateToolStripMenuItem_Click);
-			// 
-			// showControlsToolStripMenuItem
-			// 
-			this.showControlsToolStripMenuItem.CheckOnClick = true;
-			this.showControlsToolStripMenuItem.Name = "showControlsToolStripMenuItem";
-			this.showControlsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-			this.showControlsToolStripMenuItem.Text = "Show Controls";
-			this.showControlsToolStripMenuItem.Click += new System.EventHandler(this.showControlsToolStripMenuItem_Click);
-			// 
-			// closeToolStripMenuItem
-			// 
-			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-			this.closeToolStripMenuItem.Text = "Close";
-			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
-			// 
-			// toolStripSeparator1
-			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
+			this.btnFontChanger.Location = new System.Drawing.Point(251, 545);
+			this.btnFontChanger.Name = "btnFontChanger";
+			this.btnFontChanger.Size = new System.Drawing.Size(134, 23);
+			this.btnFontChanger.TabIndex = 4;
+			this.btnFontChanger.Text = "Font Change";
+			this.btnFontChanger.UseVisualStyleBackColor = true;
+			this.btnFontChanger.Click += new System.EventHandler(this.btnFontChanger_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(900, 591);
+			this.Controls.Add(this.btnFontChanger);
 			this.Controls.Add(this.btnClose);
 			this.Controls.Add(this.btnHideControls);
 			this.Controls.Add(this.cbShowDate);
@@ -180,6 +192,7 @@
 		private System.Windows.Forms.ToolStripMenuItem showControlsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.Button btnFontChanger;
 	}
 }
 

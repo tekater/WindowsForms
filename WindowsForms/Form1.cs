@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +18,11 @@ namespace WindowsForms
 		bool show_date;
 		public Form1()
 		{
-			this.Location = new System.Drawing.Point
+			/*this.Location = new System.Drawing.Point
 				(
 				System.Windows.Forms.Screen.PrimaryScreen.Bounds.Right - this.Width - 50,
 				System.Windows.Forms.Screen.PrimaryScreen.Bounds.Top + 50
-				);
+				);*/
 
 			InitializeComponent();
 
@@ -29,6 +31,7 @@ namespace WindowsForms
 
 			btnHideControls.Visible = false;
 			btnClose.Visible = false;
+
 		}
 		private void SetShowDate(bool show_date)
 		{
@@ -183,6 +186,17 @@ namespace WindowsForms
 		private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			label1_DoubleClick(sender, e);
+		}
+
+		private void btnFontChanger_Click(object sender, EventArgs e)
+		{
+			PrivateFontCollection Fonter = new PrivateFontCollection();
+
+			Fonter.AddFontFile("C:\\Users\\tekat\\source\\repos\\WindowsForms\\WindowsForms\\TanaUncialSP.otf");
+
+			Font CustomFont = new Font(Fonter.Families[0], label1.Font.Size);
+
+			this.label1.Font = CustomFont;
 		}
 	}
 }
