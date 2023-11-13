@@ -16,6 +16,8 @@ namespace WindowsForms
 	{
 		bool visible_controls;
 		bool show_date;
+
+
 		public Form1()
 		{
 			/*this.Location = new System.Drawing.Point
@@ -56,6 +58,7 @@ namespace WindowsForms
 			//this.notifyIcon1.Visible = !visible_controls;
 
 			this.showControlsToolStripMenuItem.Checked = visible_controls;
+			this.btnFont.Visible = visible_controls;
 		}
 		private void timer1_Tick(object sender, EventArgs e)
 		{
@@ -190,13 +193,39 @@ namespace WindowsForms
 
 		private void btnFontChanger_Click(object sender, EventArgs e)
 		{
-			PrivateFontCollection Fonter = new PrivateFontCollection();
+			//PrivateFontCollection Fonter = new PrivateFontCollection();
 
-			Fonter.AddFontFile("C:\\Users\\tekat\\source\\repos\\WindowsForms\\WindowsForms\\TanaUncialSP.otf");
+			//Fonter.AddFontFile("C:\\Users\\tekat\\source\\repos\\WindowsForms\\WindowsForms\\TanaUncialSP.otf");
+			//Font CustomFont = new Font(Fonter.Families[0], label1.Font.Size);
 
-			Font CustomFont = new Font(Fonter.Families[0], label1.Font.Size);
+			//this.label1.Font = CustomFont;
+		}
 
-			this.label1.Font = CustomFont;
+		private void btnFont_Click(object sender, EventArgs e)
+		{
+			Font font = new Font();
+
+			font.ShowDialog(this);
+
+			label1.Font = font.OldFont;
+
+		}
+
+		private void Form1_ContextMenuStripChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void foregroundToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			colorDialog1.ShowDialog(this);
+			label1.ForeColor = colorDialog1.Color;
+		}
+
+		private void backgroundToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			colorDialog1.ShowDialog(this);
+			label1.BackColor = colorDialog1.Color;
 		}
 	}
 }
