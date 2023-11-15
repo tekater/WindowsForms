@@ -17,6 +17,7 @@ namespace WindowsForms
 		bool visible_controls;
 		bool show_date;
 
+		WindowsForms.Font choose_font;
 
 		public Form1()
 		{
@@ -33,6 +34,9 @@ namespace WindowsForms
 
 			btnHideControls.Visible = false;
 			btnClose.Visible = false;
+
+
+			choose_font = new WindowsForms.Font(label1.Font);
 
 		}
 		private void SetShowDate(bool show_date)
@@ -203,11 +207,11 @@ namespace WindowsForms
 
 		private void btnFont_Click(object sender, EventArgs e)
 		{
-			Font font = new Font();
+			//Font font = new Font(label1.Font);
 
-			font.ShowDialog(this);
+			choose_font.ShowDialog(this);
 
-			label1.Font = font.OldFont;
+			label1.Font = choose_font.OldFont;
 
 		}
 
@@ -226,6 +230,13 @@ namespace WindowsForms
 		{
 			colorDialog1.ShowDialog(this);
 			label1.BackColor = colorDialog1.Color;
+		}
+
+		private void toolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			//btnFont_Click(sender, e);
+			choose_font.ShowDialog(this);
+			label1.Font = choose_font.OldFont;
 		}
 	}
 }

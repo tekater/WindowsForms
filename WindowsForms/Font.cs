@@ -17,19 +17,12 @@ namespace WindowsForms
 	{
 		public System.Drawing.Font NewFont { get; set; }
 		public System.Drawing.Font OldFont { get; set; }
-		public Font()
+		public Font(System.Drawing.Font oldFont)
 		{
 			InitializeComponent();
 
 			Directory.SetCurrentDirectory("..\\..\\Fonts");
 			string currentDirectory = Directory.GetCurrentDirectory();
-			/*MessageBox.Show
-				(
-				this,
-				currentDirectory,
-				"Current Directory",
-				MessageBoxButtons.OK
-				);*/
 
 			foreach (string i in Directory.GetFiles(currentDirectory))
 			{
@@ -38,6 +31,12 @@ namespace WindowsForms
 				this.cbFont.Items.Add(i.Split('\\').Last());
 				}
 			}
+				numericUpDown1 = new NumericUpDown();
+				numericUpDown1.Value = (decimal)oldFont.Size;
+			OldFont = oldFont;
+			numericUpDown1.Value = (decimal)OldFont.Size;
+			cbFont.SelectedItem = oldFont.Name;
+
 		}
 		private void btnCancel_Click(object sender, EventArgs e)
 		{
@@ -46,6 +45,7 @@ namespace WindowsForms
 
 		private void btnOk_Click(object sender, EventArgs e)
 		{
+			//NewFont.Size = (int)numericUpDown1.Value;
 			OldFont = NewFont;
 			this.Close();
 		}
@@ -56,7 +56,8 @@ namespace WindowsForms
 
 			pfc.AddFontFile(cbFont.SelectedItem.ToString());
 
-			NewFont = new System.Drawing.Font(pfc.Families[0], lblExample.Font.Size);
+			NewFont = new System.Drawing.Font(pfc.Families[0], (int)numericUpDown1.Value);
+			//NewFont = new System.Drawing.Font(pfc.Families[0], lblExample.Font.Size);
 			lblExample.Font = NewFont;
 		}
 	}
