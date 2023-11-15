@@ -17,6 +17,7 @@ namespace WindowsForms
 	{
 		public System.Drawing.Font NewFont { get; set; }
 		public System.Drawing.Font OldFont { get; set; }
+
 		public Font(System.Drawing.Font oldFont)
 		{
 			InitializeComponent();
@@ -28,15 +29,18 @@ namespace WindowsForms
 			{
 				if (i.Split('\\').Last().Contains(".ttf") || i.Split('\\').Last().Contains(".otf"))
 				{
-				this.cbFont.Items.Add(i.Split('\\').Last());
+					this.cbFont.Items.Add(i.Split('\\').Last());
 				}
 			}
-				numericUpDown1 = new NumericUpDown();
-				numericUpDown1.Value = (decimal)oldFont.Size;
+			numericUpDown1 = new NumericUpDown();
+			numericUpDown1.Value = (decimal)oldFont.Size;
+
 			OldFont = oldFont;
 			numericUpDown1.Value = (decimal)OldFont.Size;
-			cbFont.SelectedItem = oldFont.Name;
 
+			cbFont.SelectedItem = oldFont.Name;
+			cbFont.SelectedIndex = 1;
+			
 		}
 		private void btnCancel_Click(object sender, EventArgs e)
 		{
@@ -59,6 +63,11 @@ namespace WindowsForms
 			NewFont = new System.Drawing.Font(pfc.Families[0], (int)numericUpDown1.Value);
 			//NewFont = new System.Drawing.Font(pfc.Families[0], lblExample.Font.Size);
 			lblExample.Font = NewFont;
+		}
+
+		private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+		{
+			cbFont_SelectionChangeCommitted_1(sender, e);
 		}
 	}
 }
