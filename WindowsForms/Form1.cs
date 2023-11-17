@@ -17,6 +17,13 @@ namespace WindowsForms
 		bool visible_controls;
 		bool show_date;
 
+		const string font_file_default = "7Led-8RoJ.ttf";
+		string font_file;
+		int size;
+		Color foreground;
+		Color background;
+
+
 		WindowsForms.Font choose_font;
 
 		public Form1()
@@ -38,6 +45,61 @@ namespace WindowsForms
 
 			choose_font = new WindowsForms.Font(label1.Font);
 
+			/*StreamReader sr = new StreamReader("Settings.cfg");
+
+			string font_file = sr.ReadLine();
+			int size = Convert.ToInt32(sr.ReadLine());
+
+			sr.Close();*/
+			LoadSettings();
+		}
+		public void SaveSettings()
+		{
+			StreamWriter sw = new StreamWriter("Settings.cfg");
+
+			/*
+			sw.WriteLine("Font:"		 + choose_font.FontFile);
+			sw.WriteLine("Size:"		 + label1.Font.Size);
+			sw.WriteLine("ForeColor:"	 + label1.ForeColor);
+			sw.WriteLine("BackColor:"	 + label1.BackColor);*/
+
+			sw.WriteLine(font_file);
+			sw.WriteLine(label1.Font.Size);
+			sw.WriteLine(label1.ForeColor.ToArgb());
+			sw.WriteLine(label1.BackColor.ToArgb());
+			sw.Close();
+		}
+		public void LoadSettings()
+		{
+			MessageBox.Show(this, Directory.GetCurrentDirectory(), "Directory", MessageBoxButtons.OK);
+			StreamReader sr = new StreamReader("Settings.cfg");
+			MessageBox.Show(this, sr.ToString(), "Directory", MessageBoxButtons.OK);
+
+			font_file = sr.ReadLine();
+			if (font_file == null || font_file == "")
+			{
+				font_file = font_file_default;
+			}
+
+			size = Convert.ToInt32(sr.ReadLine());
+			if (size == 0)
+			{
+				size = 48;
+			}
+
+			foreground = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+			background = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
+
+			sr.Close();
+
+
+			PrivateFontCollection pfc = new PrivateFontCollection();
+			pfc.AddFontFile(font_file);
+
+			System.Drawing.Font font = new System.Drawing.Font(pfc.Families[0], size);
+			label1.Font = font;
+			label1.ForeColor = foreground;
+			label1.BackColor = background;
 		}
 		private void SetShowDate(bool show_date)
 		{
@@ -109,6 +171,7 @@ namespace WindowsForms
 
 		private void btnClose_Click(object sender, EventArgs e)
 		{
+			SaveSettings();
 			this.Close();
 		}
 
@@ -119,6 +182,7 @@ namespace WindowsForms
 
 		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			SaveSettings();
 			this.Close();
 		}
 
@@ -212,7 +276,7 @@ namespace WindowsForms
 			choose_font.ShowDialog(this);
 
 			label1.Font = choose_font.OldFont;
-
+			font_file = choose_font.FontFile;
 		}
 
 		private void Form1_ContextMenuStripChanged(object sender, EventArgs e)
@@ -237,6 +301,7 @@ namespace WindowsForms
 			//btnFont_Click(sender, e);
 			choose_font.ShowDialog(this);
 			label1.Font = choose_font.OldFont;
+			font_file = choose_font.FontFile;
 		}
 	}
 }

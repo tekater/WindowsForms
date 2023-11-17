@@ -15,6 +15,7 @@ namespace WindowsForms
 {
 	public partial class Font : Form
 	{
+		public string FontFile { get; set; }
 		public System.Drawing.Font NewFont { get; set; }
 		public System.Drawing.Font OldFont { get; set; }
 
@@ -22,25 +23,29 @@ namespace WindowsForms
 		{
 			InitializeComponent();
 
+			if (Directory.GetCurrentDirectory().Contains("bin"))
+			{
 			Directory.SetCurrentDirectory("..\\..\\Fonts");
+			}
+
 			string currentDirectory = Directory.GetCurrentDirectory();
 
 			foreach (string i in Directory.GetFiles(currentDirectory))
 			{
-				if (i.Split('\\').Last().Contains(".ttf") || i.Split('\\').Last().Contains(".otf"))
+				if (i.Split('\\').Last().Contains(".ttf") || i.Split('\\').Last().Contains(".otf") || i.Split('\\').Last().Contains(".TTF"))
 				{
 					this.cbFont.Items.Add(i.Split('\\').Last());
 				}
 			}
+
 			numericUpDown1 = new NumericUpDown();
+
+			cbFont.SelectedIndex = 0;
+			OldFont = oldFont;
+			cbFont.SelectedItem = oldFont.Name;
+			lblExample.Font = OldFont;
 			numericUpDown1.Value = (decimal)oldFont.Size;
 
-			OldFont = oldFont;
-			numericUpDown1.Value = (decimal)OldFont.Size;
-
-			cbFont.SelectedItem = oldFont.Name;
-			cbFont.SelectedIndex = 1;
-			
 		}
 		private void btnCancel_Click(object sender, EventArgs e)
 		{
@@ -51,6 +56,7 @@ namespace WindowsForms
 		{
 			//NewFont.Size = (int)numericUpDown1.Value;
 			OldFont = NewFont;
+			FontFile = cbFont.SelectedItem.ToString();
 			this.Close();
 		}
 
@@ -59,6 +65,7 @@ namespace WindowsForms
 			PrivateFontCollection pfc = new PrivateFontCollection();
 
 			pfc.AddFontFile(cbFont.SelectedItem.ToString());
+			//pfc.AddFontFile(FontFile);
 
 			NewFont = new System.Drawing.Font(pfc.Families[0], (int)numericUpDown1.Value);
 			//NewFont = new System.Drawing.Font(pfc.Families[0], lblExample.Font.Size);
